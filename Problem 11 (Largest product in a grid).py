@@ -38,19 +38,19 @@ def max_prod_slice(arr):
 
     return max(left_diagonal_slice, right_diagonal_slice, vertical_slices, horizontal_slices)
 
-def largest_product_grid(numbers):
+def largest_product_grid(numbers, adj_num):
     arr = np.array(numbers.split(), dtype = int)
     edge = int(len(arr) ** 0.5)
     arr = arr.reshape(edge, edge)
 
     max_prod = 0
 
-    for i in range(edge - 3):
-        for j in range(edge - 3):
-            curr_arr = arr[i : i + 4, j : j + 4]
+    for i in range(edge - (adj_num - 1)):
+        for j in range(edge - (adj_num - 1)):
+            curr_arr = arr[i : i + adj_num, j : j + adj_num]
             if max_prod_slice(curr_arr) > max_prod:
                 max_prod = max_prod_slice(curr_arr)
 
     return max_prod
 
-largest_product_grid(numbers)
+largest_product_grid(numbers, 4)
